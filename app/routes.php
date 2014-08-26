@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@showHome');
+Route::get('todo', array('before' => 'auth', 'uses' => 'ToDoListController@showList'));
+Route::resource('item','ItemController');
+Route::post('user/login', 'UserController@login');
+Route::resource('user','UserController');
+Route::resource('tag','TagController');
