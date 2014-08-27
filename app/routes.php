@@ -17,5 +17,6 @@ Route::post('item/add_update', 'ItemController@store');
 Route::post('item/delete/{id}', 'ItemController@destroy');
 Route::get('item/{id}', 'ItemController@show');
 Route::post('user/login', 'UserController@login');
+Route::get('user/logout', 'UserController@logout');
 Route::get('user/create', 'UserController@create');
 Route::post('user/create', 'UserController@store');

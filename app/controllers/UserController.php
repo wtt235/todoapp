@@ -6,11 +6,18 @@ class UserController extends BaseController {
     {
         $email = Input::get('email');
         $password = Input::get('password');
-        if (Auth::attempt(array('email' => $email, 'password' => $password)))
+        $remember = Input::has('remember');
+        if (Auth::attempt(array('email' => $email, 'password' => $password),$remember))
         {
             return Redirect::intended('todo');
         }
-        return Redirect::to('user/login');
+        return Redirect::to('/');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return Redirect::to('/');
     }
 	/**
 	 * Show the form for creating a new resource.

@@ -2,54 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sign in &middot; Twitter Bootstrap</title>
+    <title>To Do - Create User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
     <link href="{{ URL::asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
-
-      /* Custom container */
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 700px;
-      }
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-      .form-signin {
-        max-width: 300px;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .form-signin .form-signin-heading,
-      .form-signin .checkbox {
-        margin-bottom: 10px;
-      }
-      .form-signin input[type="text"],
-      .form-signin input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
-
-    </style>
     <link href="{{ URL::asset('assets/bootstrap/css/bootstrap-responsive.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">
   </head>
 
   <body>
@@ -80,21 +41,6 @@
     <!-- Le javascript
     ================================================== -->
     <script src="{{ URL::asset('assets/js/jquery-1.11.1.min.js') }}"></script>
-    <script type="text/javascript">
-        var $form = $('#user-form');
-        var $emailInput = $('#inputEmail');
-        var $passwordInput = $('#inputPassword');
-        var $passwordAgainInput = $('#inputPasswordAgain');
-        $form.keyup(function(){
-            var notEmpty = $emailInput.val() !== '' && $emailInput.val() !== '' &&
-                $passwordInput.val() !== '' && $passwordAgainInput.val() != '';
-            var passwordsMatch =  $passwordInput.val() === $passwordAgainInput.val();
-            if(notEmpty && passwordsMatch){
-                $('#submit-user').removeAttr('disabled');
-            }else{
-                $('#submit-user').attr('disabled','disabled');
-            }
-        });
-    </script>
+    <script src="{{ URL::asset('assets/js/create-user.js') }}"></script>
   </body>
 </html>
