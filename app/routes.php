@@ -13,7 +13,9 @@
 
 Route::get('/', 'HomeController@showHome');
 Route::get('todo', array('before' => 'auth', 'uses' => 'ToDoListController@showList'));
-Route::resource('item','ItemController');
+Route::post('item/add_update', 'ItemController@store');
+Route::post('item/delete/{id}', 'ItemController@destroy');
+Route::get('item/{id}', 'ItemController@show');
 Route::post('user/login', 'UserController@login');
-Route::resource('user','UserController');
-Route::resource('tag','TagController');
+Route::get('user/create', 'UserController@create');
+Route::post('user/create', 'UserController@store');

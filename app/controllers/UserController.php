@@ -12,18 +12,6 @@ class UserController extends BaseController {
         }
         return Redirect::to('user/login');
     }
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -31,9 +19,8 @@ class UserController extends BaseController {
 	 */
 	public function create()
 	{
-		//
+        return View::make('userform');
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -46,58 +33,6 @@ class UserController extends BaseController {
         $user->email = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
         $user->save();
+        return Redirect::to('/');
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-        $user = User::find($id);
-        $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
-        $user->save();
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		User::destory($id);
-	}
-
-
 }

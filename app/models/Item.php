@@ -1,5 +1,7 @@
 <?php
 
+use \Carbon\Carbon;
+
 class Item extends Eloquent{
 
     protected $guarded = array('id');
@@ -12,5 +14,17 @@ class Item extends Eloquent{
     public function tags()
     {
         return $this->hasMany('Tag');
+    }
+
+    public function getFormattedDueDate()
+    {
+        $date = Carbon::createFromFormat('Y-m-d',$this->due);
+        return $date->format('M d, Y');
+    }
+
+    public function getShortFormattedDueDate()
+    {
+        $date = Carbon::createFromFormat('Y-m-d',$this->due);
+        return $date->format('m/d/Y');
     }
 }

@@ -9,9 +9,9 @@
 class ToDoListController  extends BaseController{
 
     public function showList(){
-        $user_id = Auth::id();
-        $user = User::find($user_id);
-        $items = $user->items();
+        $user = User::find(Auth::id());
+        $items = $user->items()->orderBy('due', 'asc')->get();
+        return View::make('list', array('items' => $items))->nest('taskform', 'taskform');
     }
 
 } 

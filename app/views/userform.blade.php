@@ -67,15 +67,12 @@
 
       <hr>
 
-    {{ Form::open(array('url' => 'user/login', 'class' => 'form-signin')) }}
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input name="email" type="text" class="input-block-level" placeholder="Email address">
-        <input name="password" type="password" class="input-block-level" placeholder="Password">
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-        {{ Form::submit('Sign In', array('class' => 'btn btn-large btn-primary')) }}
-         <a class="btn btn-large" type="button" href="{{ URL::action('UserController@create') }}">New User</a>
+    {{ Form::open(array('url' => 'user/create', 'id'=>'user-form')) }}
+        <h2 class="form-signin-heading">New User</h2>
+        <input name="email" id="inputEmail" type="text" class="input-block-level" placeholder="Email address">
+        <input name="password" id="inputPassword" type="password" class="input-block-level" placeholder="Password">
+        <input name="password-again" id="inputPasswordAgain" type="password" class="input-block-level" placeholder="Password Again">
+        {{ Form::submit('Create', array('class' => 'btn btn-large btn-primary', 'id' => 'submit-user', 'disabled')) }}
     {{ Form::close() }}
 
     </div> <!-- /container -->
@@ -83,5 +80,21 @@
     <!-- Le javascript
     ================================================== -->
     <script src="{{ URL::asset('assets/js/jquery-1.11.1.min.js') }}"></script>
+    <script type="text/javascript">
+        var $form = $('#user-form');
+        var $emailInput = $('#inputEmail');
+        var $passwordInput = $('#inputPassword');
+        var $passwordAgainInput = $('#inputPasswordAgain');
+        $form.keyup(function(){
+            var notEmpty = $emailInput.val() !== '' && $emailInput.val() !== '' &&
+                $passwordInput.val() !== '' && $passwordAgainInput.val() != '';
+            var passwordsMatch =  $passwordInput.val() === $passwordAgainInput.val();
+            if(notEmpty && passwordsMatch){
+                $('#submit-user').removeAttr('disabled');
+            }else{
+                $('#submit-user').attr('disabled','disabled');
+            }
+        });
+    </script>
   </body>
 </html>
