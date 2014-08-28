@@ -23,7 +23,7 @@
 
       <hr>
 
-    {{ Form::open(array('url' => 'user/create', 'id'=>'user-form')) }}
+    {{ Form::open(array('url' => 'user', 'id'=>'user-form')) }}
         <h2 class="form-signin-heading">New User</h2>
         <input name="email" id="inputEmail" type="text" class="input-block-level" placeholder="Email address">
         <input name="password" id="inputPassword" type="password" class="input-block-level" placeholder="Password">
