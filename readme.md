@@ -14,8 +14,6 @@ After you have the database set up, it may be necessary to run the following:
 
     php composer.phar install -o
 
-*Make sure you have composer.phar in the project directory first*
-
 ### License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
