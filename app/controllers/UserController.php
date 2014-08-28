@@ -20,7 +20,7 @@ class UserController extends BaseController {
         return Redirect::to('/');
     }
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new user.
 	 *
 	 * @return Response
 	 */
@@ -30,7 +30,7 @@ class UserController extends BaseController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created user in storage.
 	 *
 	 * @return Response
 	 */

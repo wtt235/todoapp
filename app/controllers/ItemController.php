@@ -10,43 +10,27 @@ class ItemController extends BaseController {
     }
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a resource in storage. Will wither update or add, depending on if itemId
+     * if provided.
 	 *
-	 * @return Response
+	 * @return Redirect
 	 */
 
 	public function store()
 	{
-        $id = Input::get('_task-id');
-        $item = null;
-        if(!empty($id))
-        {
-            $item = $this->item->find($id);
-        }
-        else
-        {
-            $item = new Item;
-        }
-        $item->user_id = Auth::id();
-        $item->title = Input::get('title');
-        $item->body = Input::get('body');
-        $item->setFromFormattedDate(Input::get('due'));
-        $item->save();
-        $tags = array();
-        $tag_names = explode(",",Input::get('tags'));
-        foreach($tag_names as $tag_name)
-        {
-            $tag = new Tag;
-            $tag->name = $tag_name;
-            $tags[] = $tag;
-        }
-        $item->tags()->delete();
-        $item->tags()->saveMany($tags);
-        return Redirect::to('todo');
+        $item = new Item;
+        $this->fillItem($item);
 	}
 
+    public function update($id){
+
+        $item = $this->item->find($id);
+        $this->fillItem($item);
+    }
+
+
 	/**
-	 * Display the specified resource.
+	 * Display the specified item in json format
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -58,7 +42,7 @@ class ItemController extends BaseController {
         return $item->toJson();
 	}
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the item from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -67,6 +51,31 @@ class ItemController extends BaseController {
     {
         $item = $this->item->find($id);
 		$item->delete();
-        return Redirect::to('todo');
 	}
+
+    private function fillItem($item)
+    {
+        $userId  = Auth::id();
+        $title = trim(Input::get('title'));
+        $body = trim(Input::get('body'));
+        $due = Input::get('due');
+        $item->user_id = $userId;
+        $item->title = $title;
+        if(!empty($body))
+        {
+            $item->body = $body;
+        }
+        $item->setFromFormattedDate($due);
+        $item->save();
+        $tags = array();
+        $tag_names = explode(",",Input::get('tags'));
+        foreach($tag_names as $tag_name)
+        {
+            $tag = new Tag;
+            $tag->name = $tag_name;
+            $tags[] = $tag;
+        }
+        $item->tags()->delete();
+        $item->tags()->saveMany($tags);
+    }
 }

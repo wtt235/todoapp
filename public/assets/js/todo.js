@@ -1,11 +1,26 @@
 var $form = $('#item-form');
+var $method = $('#_method');
 var $inputTitle = $('#inputTitle');
 var $inputBody  = $('#inputBody');
 var $inputDue = $('#inputDue');
 var $submitButton = $('#submit-form');
 $('#tags').tagsInput();
 $submitButton.click( function(){
-    $form.submit();
+    var currentMethod = $method.val();
+    var formData = $form.serializeArray();
+    if(currentMethod === 'POST'){
+        $.post( "item", formData, function(){
+            location.reload(true);
+        });
+    } else if (currentMethod === 'PUT'){
+        var $currentID = $('#_task-id').val();
+        $.ajax({
+            url: 'item/' + $currentID,
+            type: 'PUT',
+            data: formData,
+            success: function() { location.reload(true);}
+        });
+    }
 });
 $('#add-task').click(function(){
     clearInputs();
@@ -13,6 +28,7 @@ $('#add-task').click(function(){
     $('#myModalLabel').text('Add Task');
     $('#submit-form').text('Add');
     checkInputs();
+    $method.val('POST');
     $('#myModal').modal('show');
 });
 $('.item-edit').click( function(){
@@ -34,6 +50,7 @@ $('.item-edit').click( function(){
         });
         $('#tags').importTags(all_tags);
         checkInputs();
+        $method.val('PUT');
         $('#myModal').modal('show');
     });
 
@@ -41,9 +58,10 @@ $('.item-edit').click( function(){
 $('.item-delete').click(function(){
     var $current_row =  $(this).closest('tr');
     var $item_id = $current_row.attr('id');
-    var delete_url = "item/delete/" + $item_id;
-    $.post( delete_url, function(){
-        $current_row.remove();
+    $.ajax({
+        url: 'item/' + $item_id,
+        type: 'DELETE',
+        success: function() { $current_row.remove();}
     });
 });
 

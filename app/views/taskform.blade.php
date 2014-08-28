@@ -3,8 +3,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Add Task</h3>
     </div>
-    {{ Form::open(array('url' => 'item/add_update', 'class' => 'form-horizontal', 'id' => 'item-form')) }}
+    {{ Form::open(array('class' => 'form-horizontal', 'id' => 'item-form')) }}
         <br/>
+        <input type="hidden" id="_method" name ="_method" value="POST">
         <input type="hidden" id="_task-id" name ="_task-id" value="">
         <div class="control-group">
             <label class="control-label" for="inputTitle">Title</label>

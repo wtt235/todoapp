@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: todd
- * Date: 8/25/14
- * Time: 9:48 PM
- */
 
 class ToDoListController  extends BaseController{
 
@@ -15,7 +9,12 @@ class ToDoListController  extends BaseController{
         $this->user = $user;
     }
 
-    public function showList(){
+    /**
+     * @return mixed
+     * gathers tasks (items) for the authenticated user and loads them into the to list view
+     */
+    public function showList()
+    {
         $user = $this->user->find(Auth::id());
         $items = $user->items()->orderBy('due', 'asc')->get();
         return View::make('list', array('items' => $items))->nest('taskform', 'taskform');

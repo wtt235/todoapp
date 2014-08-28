@@ -13,10 +13,9 @@
 
 Route::get('/', 'HomeController@showHome');
 Route::get('todo', array('before' => 'auth', 'uses' => 'ToDoListController@showList'));
-Route::post('item/add_update',  array('before' => 'auth', 'uses' => 'ItemController@store'));
-Route::post('item/delete/{id}',  array('before' => 'auth', 'uses' => 'ItemController@destroy'));
-Route::get('item/{id}',  'ItemController@show');
+Route::group(array('before'=>'auth'), function() {
+    Route::resource('item', 'ItemController');
+});
 Route::post('user/login', 'UserController@login');
 Route::get('user/logout',  'UserController@logout');
-Route::get('user/create',  'UserController@create');
-Route::post('user/create',  'UserController@store');
+Route::resource('user', 'UserController');

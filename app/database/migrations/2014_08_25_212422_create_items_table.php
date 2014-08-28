@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('title');
-            $table->string('body');
+            $table->string('body')->nullable();
             $table->date('due');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
