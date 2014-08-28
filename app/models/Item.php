@@ -27,4 +27,10 @@ class Item extends Eloquent{
         $date = Carbon::createFromFormat('Y-m-d',$this->due);
         return $date->format('m/d/Y');
     }
+
+    public function setFromFormattedDate($fDate)
+    {
+        $date = strtotime($fDate);
+        $this->due =  date('Y-m-d', $date);
+    }
 }

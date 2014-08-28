@@ -18,12 +18,7 @@
     <div class="container-narrow">
 
       <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="muted">Project name</h3>
+        <h3 class="muted">To Do</h3>
       </div>
 
       <hr>
@@ -34,8 +29,11 @@
         <input name="password" id="inputPassword" type="password" class="input-block-level" placeholder="Password">
         <input name="password-again" id="inputPasswordAgain" type="password" class="input-block-level" placeholder="Password Again">
         {{ Form::submit('Create', array('class' => 'btn btn-large btn-primary', 'id' => 'submit-user', 'disabled')) }}
+        <a class="btn btn-large" href="{{ URL::to('/') }}">Cancel</a>
     {{ Form::close() }}
-
+      <div class="footer">
+        <p>&copy; I made this!</p>
+      </div>
     </div> <!-- /container -->
 
     <!-- Le javascript

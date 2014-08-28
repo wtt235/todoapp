@@ -8,8 +8,15 @@
 
 class ToDoListController  extends BaseController{
 
+    protected $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     public function showList(){
-        $user = User::find(Auth::id());
+        $user = $this->user->find(Auth::id());
         $items = $user->items()->orderBy('due', 'asc')->get();
         return View::make('list', array('items' => $items))->nest('taskform', 'taskform');
     }

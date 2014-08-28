@@ -1,18 +1,27 @@
 <?php
 
 class ItemController extends BaseController {
+
+    protected $item;
+
+    public function __construct(Item $item)
+    {
+        $this->item = $item;
+    }
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
+
 	public function store()
 	{
         $id = Input::get('_task-id');
         $item = null;
         if(!empty($id))
         {
-            $item = Item::find($id);
+            $item = $this->item->find($id);
         }
         else
         {
@@ -21,8 +30,7 @@ class ItemController extends BaseController {
         $item->user_id = Auth::id();
         $item->title = Input::get('title');
         $item->body = Input::get('body');
-        $time = strtotime(Input::get('due'));
-        $item->due = date('Y-m-d', $time);
+        $item->setFromFormattedDate(Input::get('due'));
         $item->save();
         $tags = array();
         $tag_names = explode(",",Input::get('tags'));
@@ -45,7 +53,7 @@ class ItemController extends BaseController {
 	 */
 	public function show($id)
 	{
-        $item = Item::with('tags')->find($id);
+        $item = $this->item->with('tags')->find($id);
         $item->due = $item->getShortFormattedDueDate();
         return $item->toJson();
 	}
@@ -56,8 +64,8 @@ class ItemController extends BaseController {
 	 * @return Response
 	 */
 	public function destroy($id)
-	{
-        $item = Item::find($id);
+    {
+        $item = $this->item->find($id);
 		$item->delete();
         return Redirect::to('todo');
 	}

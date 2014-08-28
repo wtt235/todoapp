@@ -32,7 +32,9 @@
         {{ Form::submit('Sign In', array('class' => 'btn btn-large btn-primary')) }}
          <a class="btn btn-large" type="button" href="{{ URL::action('UserController@create') }}">New User</a>
     {{ Form::close() }}
-
+      <div class="footer">
+        <p>&copy; I made this!</p>
+      </div>
     </div> <!-- /container -->
   </body>
 </html>

@@ -14,4 +14,13 @@ class ExampleTest extends TestCase {
 		$this->assertTrue($this->client->getResponse()->isOk());
 	}
 
+    public function testCreateUserForm()
+    {
+        $crawler = $this->client->request('GET', 'user/create');
+
+        $this->assertTrue($this->client->getResponse()->isOk());
+    }
+
+
+
 }

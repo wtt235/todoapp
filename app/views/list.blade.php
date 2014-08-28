@@ -52,7 +52,7 @@
       <hr>
 
       <div class="footer">
-        <p>&copy; Company 2013</p>
+        <p>&copy; I made this!</p>
       </div>
 
     </div> <!-- /container -->
