@@ -10,7 +10,7 @@ Before you can run the app, you will need to create a new MySQL database on your
 -   username
 -   password
 
-After you have the database set up, it may be necessary to run the following from within the project directory:
+After you have the database set up, it may be necessary to run the following:
 
     php composer.phar install -o
 
